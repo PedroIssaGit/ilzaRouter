@@ -249,12 +249,11 @@ Navigo.prototype = {
   },
   on: function on() {
     const _this = this;
-    var _len = arguments.length; 
+    var _len = arguments.length, 
     var args = Array(_len);
     for (var _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-
 
     if (typeof args[0] === 'function') {
       this._defaultHandler = {handler: args[0], hooks: args[1]};
