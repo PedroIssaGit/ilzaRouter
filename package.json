@@ -1,0 +1,41 @@
+{
+  "name": "ilzaRouter",
+  "version": "1.0",
+  "description": "A modified version of Navigo Router 7.1.2 (https://github.com/krasimir/navigo/tree/7.1.2), to work with gestures and another particular Ilza needs.",
+  "module": "index.es.js",
+  "dependencies": {},
+  "author": {
+    "name": "Pedro Issa",
+    "email": "pedrohenriqueissa@gmail.com",
+    "url": ""
+  },
+  "license": "MIT",
+  "keywords": [
+    "router",
+    "vanilla",
+    "hash",
+    "history"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PedroIssaGit/ilzaRouter.git"
+  },
+  "scripts": {
+    "format": "prettier --write --html-whitespace-sensitivity=ignore --embedded-language-formatting=auto --print-width=75 --use-tabs=false --loglevel=warn \"index.es.js\"",
+    "lint": "npm run format && eslint \"index.es.js\" --ext .js",
+    "lint:fix": "npm run lint -- --fix",
+    "watch": "rollup -c -w rollup.config.js --environment BUILD:development",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "rollup -c rollup.config.js --environment BUILD:development",
+    "build:prod": "rollup -c rollup.config.js --environment BUILD:production",
+    "release": "npm run build && npm run test",
+    "test": "node ./test/karma.js",
+    "test-chrome": "node ./test/karma.js --browser=Chrome --watch=true",
+    "test-firefox": "node ./test/karma.js --browser=Firefox  --watch=true"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "prettier": "^2.2.1",
+    "eslint-config-google": "^0.14.0"
+  }
+}
