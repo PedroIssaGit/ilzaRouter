@@ -98,9 +98,9 @@ function compareUrlDepth(urlA, urlB) {
   return getUrlDepth(urlB) - getUrlDepth(urlA);
 }
 
-function findMatchedRoutes(url, ...args) {
+function findMatchedRoutes(url) {
   const routes =
-    typeof args[0] === 'object' && args[0] !== null ? args[1] : [];
+    typeof arguments[0] === 'object' && arguments[0] !== null ? arguments[1] : [];
 
   return routes
       .map(function(route) {
@@ -179,7 +179,7 @@ function getOnlyURL(url, useHash, hash) {
   return onlyURL;
 }
 
-function manageHooks(handler, hooks, params, ...args) {
+function manageHooks(handler, hooks, params) {
   if (
     hooks &&
     (typeof hooks === 'undefined' ? 'undefined' : _typeof(hooks)) ===
@@ -188,7 +188,7 @@ function manageHooks(handler, hooks, params, ...args) {
     if (hooks.before) {
       hooks.before(function() {
         const shouldRoute =
-          args.length > 0 && args[0] !== 'undefined' ? args[0] : true;
+        arguments.length > 0 && arguments[0] !== 'undefined' ? arguments[0] : true;
 
         if (!shouldRoute) return;
         handler();
@@ -455,8 +455,8 @@ Navigo.prototype = {
       }
     });
   },
-  generate: function generate(name, ...args) {
-    const data = args.length > 1 && args[1] !== 'undefined' ? args[1] : {};
+  generate: function generate(name) {
+    const data = arguments.length > 1 && arguments[1] !== 'undefined' ? arguments[1] : {};
 
     const result = this._routes.reduce(function(result, route) {
       let key;
