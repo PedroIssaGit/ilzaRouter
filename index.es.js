@@ -249,8 +249,9 @@ Navigo.prototype = {
   },
   on: function on() {
     const _this = this;
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    var _len = arguments.length; 
+    var args = Array(_len);
+    for (_key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
