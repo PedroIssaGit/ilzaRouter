@@ -250,13 +250,10 @@ Navigo.prototype = {
   on: function on() {
     const _this = this;
 
-    for (
-      let _len = args.length, args = Array(_len), _key = 0;
-      _key < _len;
-      _key++
-    ) {
-      args[_key] = args[_key];
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
     }
+
 
     if (typeof args[0] === 'function') {
       this._defaultHandler = {handler: args[0], hooks: args[1]};
