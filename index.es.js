@@ -98,7 +98,7 @@ function compareUrlDepth(urlA, urlB) {
   return getUrlDepth(urlB) - getUrlDepth(urlA);
 }
 
-function findMatchedRoutes(url) {
+function findMatchedRoutes(url, ...args) {
   const routes =
     typeof args[0] === 'object' && args[0] !== null ? args[1] : [];
 
@@ -179,7 +179,7 @@ function getOnlyURL(url, useHash, hash) {
   return onlyURL;
 }
 
-function manageHooks(handler, hooks, params) {
+function manageHooks(handler, hooks, params, ...args) {
   if (
     hooks &&
     (typeof hooks === 'undefined' ? 'undefined' : _typeof(hooks)) ===
@@ -455,7 +455,7 @@ Navigo.prototype = {
       }
     });
   },
-  generate: function generate(name) {
+  generate: function generate(name, ...args) {
     const data = args.length > 1 && args[1] !== 'undefined' ? args[1] : {};
 
     const result = this._routes.reduce(function(result, route) {
