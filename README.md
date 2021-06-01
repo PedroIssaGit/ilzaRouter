@@ -1,4 +1,4 @@
-# ilzaRouter
+# IlzaRouter
 A modified version of Navigo Router 7.1.2 (https://github.com/krasimir/navigo/tree/7.1.2), to work with gestures and another particular Ilza needs.
 
 ### Todo
