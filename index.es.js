@@ -249,7 +249,7 @@ Navigo.prototype = {
   },
   on: function on() {
     const _this = this;
-    var _len = arguments.length; 
+    const _len = arguments.length; 
     let args = Array(_len);
     for (let _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -544,7 +544,7 @@ Navigo.prototype = {
     this._genericHooks = _hooks;
   },
 
-  _add: function _add(route) {
+  _add: function _add(route, ...args) {
     const handler =
       args.length > 1 && args[1] !== 'undefined' ? args[1] : null;
     const hooks =
