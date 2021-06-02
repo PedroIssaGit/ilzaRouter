@@ -1,4 +1,4 @@
-// Based on version 7.1.2 of Krasimir Navigo Router (https://github.com/krasimir/navigo/tree/7.1.2)
+// Versão 7.1.2
 
 const _typeof =
   typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol' ?
@@ -100,7 +100,9 @@ function compareUrlDepth(urlA, urlB) {
 
 function findMatchedRoutes(url) {
   const routes =
-    typeof arguments[0] === 'object' && arguments[0] !== null ? arguments[1] : [];
+    arguments.length > 1 && arguments[1] !== 'undefined' ?
+      arguments[1] :
+      [];
 
   return routes
       .map(function(route) {
@@ -188,7 +190,9 @@ function manageHooks(handler, hooks, params) {
     if (hooks.before) {
       hooks.before(function() {
         const shouldRoute =
-        arguments.length > 0 && arguments[0] !== 'undefined' ? arguments[0] : true;
+          arguments.length > 0 && arguments[0] !== 'undefined' ?
+            arguments[0] :
+            true;
 
         if (!shouldRoute) return;
         handler();
@@ -249,9 +253,12 @@ Navigo.prototype = {
   },
   on: function on() {
     const _this = this;
-    const _len = arguments.length; 
-    let args = Array(_len);
-    for (let _key = 0; _key < _len; _key++) {
+
+    for (
+      var _len = arguments.length, args = Array(_len), _key = 0;
+      _key < _len;
+      _key++
+    ) {
       args[_key] = arguments[_key];
     }
 
@@ -362,7 +369,10 @@ Navigo.prototype = {
             manageHooks(
                 function() {
               m.route.route instanceof RegExp ?
-                handler(...m.match.slice(1, m.match.length)) :
+                handler.apply(
+                    undefined,
+                    m.match.slice(1, m.match.length),
+                ) :
                 handler(m.params, GETParameters);
                 },
                 m.route.hooks,
@@ -456,7 +466,10 @@ Navigo.prototype = {
     });
   },
   generate: function generate(name) {
-    const data = arguments.length > 1 && arguments[1] !== 'undefined' ? arguments[1] : {};
+    const data =
+      arguments.length > 1 && arguments[1] !== 'undefined' ?
+        arguments[1] :
+        {};
 
     const result = this._routes.reduce(function(result, route) {
       let key;
@@ -464,9 +477,7 @@ Navigo.prototype = {
       if (route.name === name) {
         result = route.route;
         for (key in data) {
-          if (data.hasOwnProperty(key)) {
-            result = result.toString().replace(':' + key, data[key]);
-          }
+          result = result.toString().replace(':' + key, data[key]);
         }
       }
       return result;
@@ -479,7 +490,9 @@ Navigo.prototype = {
   },
   pause: function pause() {
     const status =
-      args.length > 0 && args[0] !== 'undefined' ? args[0] : true;
+      arguments.length > 0 && arguments[0] !== 'undefined' ?
+        arguments[0] :
+        true;
 
     this._paused = status;
     if (status) {
@@ -522,7 +535,7 @@ Navigo.prototype = {
     return this._routes;
   },
   matched: function matched(rts) {
-    rts = rts || this._routes;
+    var rts = rts || this._routes;
     return match(window.location.href, rts);
   },
   historyListUpdate: function historyListUpdate(hlist) {
@@ -544,11 +557,15 @@ Navigo.prototype = {
     this._genericHooks = _hooks;
   },
 
-  _add: function _add(route, ...args) {
+  _add: function _add(route) {
     const handler =
-      args.length > 1 && args[1] !== 'undefined' ? args[1] : null;
+      arguments.length > 1 && arguments[1] !== 'undefined' ?
+        arguments[1] :
+        null;
     const hooks =
-      args.length > 2 && args[2] !== 'undefined' ? args[2] : null;
+      arguments.length > 2 && arguments[2] !== 'undefined' ?
+        arguments[2] :
+        null;
 
     if (typeof route === 'string') {
       route = encodeURI(route);

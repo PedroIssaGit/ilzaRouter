@@ -22,6 +22,7 @@ module.exports = {
         ClassDeclaration: false,
      }
     }],
+    "prefer-rest-params": "off"
   }
 
 };
