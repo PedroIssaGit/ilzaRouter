@@ -471,7 +471,9 @@ Navigo.prototype = {
       if (route.name === name) {
         result = route.route;
         for (key in data) {
-          result = result.toString().replace(':' + key, data[key]);
+          if (data.hasOwnProperty(key)) {
+            result = result.toString().replace(':' + key, data[key]);
+          }
         }
       }
       return result;
@@ -529,7 +531,7 @@ Navigo.prototype = {
     return this._routes;
   },
   matched: function matched(rts) {
-    var rts = rts || this._routes;
+    rts = rts || this._routes;
     return match(window.location.href, rts);
   },
   historyListUpdate: function historyListUpdate(hlist) {
