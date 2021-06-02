@@ -366,10 +366,7 @@ Navigo.prototype = {
             manageHooks(
                 function() {
               m.route.route instanceof RegExp ?
-                handler.apply(
-                    undefined,
-                    m.match.slice(1, m.match.length),
-                ) :
+                handler(...m.match.slice(1, m.match.length)) :
                 handler(m.params, GETParameters);
                 },
                 m.route.hooks,
