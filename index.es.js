@@ -325,6 +325,9 @@ Navigo.prototype = {
       onlyURL === this._lastRouteResolved.url &&
       GETParameters === this._lastRouteResolved.query
     ) {
+      if(this._genericHooks &&  this._genericHooks.already){
+        this._genericHooks.already(this._lastRouteResolved.params)
+      }
       if (
         this._lastRouteResolved.hooks &&
         this._lastRouteResolved.hooks.already
