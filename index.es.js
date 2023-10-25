@@ -381,13 +381,30 @@ Navigo.prototype = {
           m.params,
       );
       return m;
-    } else if (
-      this._defaultHandler &&
-      (onlyURL === '' ||
+    } else {
+        if (this._notFoundHandler && ( !(onlyURL === '' ||
         onlyURL === '/' ||
         onlyURL === this._hash ||
-        isHashedRoot(onlyURL, this._useHash, this._hash))
-    ) {
+        isHashedRoot(onlyURL, this._useHash, this._hash)))) {
+          manageHooks(function() {
+            manageHooks(function() {
+              _this2._callLeave();
+              _this2._lastRouteResolved = {
+                url: onlyURL,
+                query: GETParameters,
+                hooks: _this2._notFoundHandler.hooks,
+              };
+              _this2._notFoundHandler.handler(GETParameters);
+            }, _this2._notFoundHandler.hooks);
+          }, this._genericHooks);
+          return;
+        }
+      if(!this._defaultHandler || !((onlyURL === '' ||
+      onlyURL === '/' ||
+      onlyURL === this._hash ||
+      isHashedRoot(onlyURL, this._useHash, this._hash)))){
+        return;
+      } 
       manageHooks(function() {
         manageHooks(function() {
           _this2._callLeave();
@@ -400,20 +417,7 @@ Navigo.prototype = {
         }, _this2._defaultHandler.hooks);
       }, this._genericHooks);
       return true;
-    } else if (this._notFoundHandler) {
-      manageHooks(function() {
-        manageHooks(function() {
-          _this2._callLeave();
-          _this2._lastRouteResolved = {
-            url: onlyURL,
-            query: GETParameters,
-            hooks: _this2._notFoundHandler.hooks,
-          };
-          _this2._notFoundHandler.handler(GETParameters);
-        }, _this2._notFoundHandler.hooks);
-      }, this._genericHooks);
     }
-
     _this2 = null;
 
     handler, (m = null);
